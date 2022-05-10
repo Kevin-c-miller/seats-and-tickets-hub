@@ -10,4 +10,4 @@ const userSchema = new mongoose_1.Schema({
     confirmPassword: { type: String, required: true, trim: true },
     isAdmin: false,
 }, { timestamps: true });
-module.exports = (0, mongoose_1.model)('User', userSchema);
+exports.default = userSchema;
