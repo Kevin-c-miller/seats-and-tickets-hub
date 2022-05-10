@@ -2,11 +2,9 @@
   "name": "seats-and-tickets-hub",
   "version": "1.0.0",
   "description": "event tickets info",
-  "main": "index.ts",
+  "main": "./backend/dist/server.js",
   "scripts": {
-    "start": "node backend/server.ts",
-    "server": "nodemon backend/server.ts",
-    "client": "npm start --prefix client"
+    "start": "nodemon dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -19,14 +17,21 @@
   },
   "homepage": "https://github.com/Kevin-c-miller/seats-and-tickets-hub#readme",
   "dependencies": {
+    "@types/mongoose": "^5.11.97",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
     "colors": "^1.4.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.3.3"
+    "mongoose": "^6.3.3",
+    "typescript": "^4.6.4"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/node": "^17.0.31",
     "nodemon": "^2.0.16"
   }
 }
