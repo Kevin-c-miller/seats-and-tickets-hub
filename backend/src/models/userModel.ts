@@ -1,7 +1,7 @@
-import { Schema, Document } from 'mongoose';
+import { Schema } from 'mongoose';
 
 // interface for types to be included in the schema
-interface User extends Document {
+interface User {
   userName: String;
   name: string;
   email: string;
