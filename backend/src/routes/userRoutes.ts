@@ -1,12 +1,11 @@
 import { Router } from 'express';
+import { signUpUser, loginUser } from '../controllers/auth/authController';
 
-const router = Router()
+const router = Router();
 
 // register user
-// router.post('/', registerUser)
+router
+  .post('/', signUpUser)
 
-// login user
-// .post('/login', loginUser)
-
-// protect function to protect route 
-// .get('/me', protect, getMe)
+  // login user
+  .post('/login', loginUser);
