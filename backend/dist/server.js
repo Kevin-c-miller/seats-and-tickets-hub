@@ -27,8 +27,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const body_parser_1 = require("body-parser");
+const body_parser_1 = __importDefault(require("body-parser"));
 const dotenv = __importStar(require("dotenv"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const db_1 = __importDefault(require("./config/db"));
 const PORT = process.env.PORT || 5000;
 dotenv.config();
@@ -37,7 +38,8 @@ dotenv.config();
 const app = (0, express_1.default)();
 // middleware
 app.use(express_1.default.json());
-app.use((0, body_parser_1.json)()); // body-parser
+app.use(body_parser_1.default.json()).use(body_parser_1.default.urlencoded({ extended: false }));
+app.use((0, cookie_parser_1.default)());
 // routes
 // app.use('/api/users', userRoutes)
 // app.use('/api/events', eventRoutes)
