@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginUser = exports.signUpUser = exports.authRequired = exports.createToken = void 0;
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const userModel_1 = __importDefault(require("../../models/userModel"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const securePassword_1 = require("../../utilities/securePassword");
