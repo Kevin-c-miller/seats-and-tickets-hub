@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
-import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
+import jwt from 'jsonwebtoken';
 import User from '../../models/userModel';
 import bcrypt from 'bcryptjs';
 import { securePassword } from '../../utilities/securePassword';

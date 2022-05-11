@@ -4,8 +4,8 @@ import { updateUser, deleteUser } from '../controllers/user/userController';
 
 const router = Router();
 
-// register user
 router
+  // register user
   .post('/register', signUpUser)
 
   // login user

@@ -32,6 +32,7 @@ const dotenv = __importStar(require("dotenv"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const db_1 = __importDefault(require("./config/db"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
+const errorMiddleware_1 = require("./middleware/errorMiddleware");
 const PORT = process.env.PORT || 5000;
 dotenv.config();
 // connect to db
@@ -44,6 +45,7 @@ app.use((0, cookie_parser_1.default)());
 // routes
 app.use('/api/users', userRoutes_1.default);
 // app.use('/api/events', eventRoutes)
+app.use(errorMiddleware_1.errorHandler);
 app.listen(PORT, () => {
     console.log(`Server listening on PORT ${PORT}.`);
 });
