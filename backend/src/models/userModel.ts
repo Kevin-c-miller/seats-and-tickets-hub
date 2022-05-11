@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 // interface for types to be included in the schema
 interface User {
@@ -11,7 +11,7 @@ interface User {
 }
 
 // userSchema corresponding to User interface
-const userSchema = new Schema<User>(
+const userSchema = new mongoose.Schema<User>(
   {
     userName: { type: String, required: true, unique: true, trim: true },
     name: { type: String, required: true, trim: true },
@@ -23,4 +23,6 @@ const userSchema = new Schema<User>(
   { timestamps: true }
 );
 
-export default userSchema;
+const User = mongoose.model('users', userSchema);
+
+export default User;
