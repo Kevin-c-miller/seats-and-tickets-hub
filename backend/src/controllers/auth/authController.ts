@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
 import User from '../../models/userModel';
 import bcrypt from 'bcryptjs';
+import { securePassword } from '../../utilities/securePassword';
 
 // create token
 export const createToken = (id: any) => {
@@ -58,10 +59,6 @@ export const signUpUser: RequestHandler = asyncHandler(
         throw new Error('User with that email already exists');
       }
 
-      // hash password
-      const salt = await bcrypt.genSalt(10); // adding 10 random chars
-      const hashedPassword = await bcrypt.hash(password, salt); // hash pw w/ special/extra 10 chars
-
       // create the new user
       const newUser = new User({
         userName,
@@ -74,7 +71,59 @@ export const signUpUser: RequestHandler = asyncHandler(
 
       // if user successfully created
       if (newUser) {
+        const token = createToken(newUser._id);
+        res.cookie('jwt', token, { maxAge: 84000 });
+
+        //   use secure password function to hash the new user's password
+        newUser.password = await securePassword(newUser.password);
+        newUser.confirmPassword = newUser.password;
+
+        res.json({
+          message: `Hi ${newUser.userName}! Welcome to my User API`,
+          user: newUser._id,
+        });
+        //   save new user to db
+        await newUser.save();
+
+        res.status(201);
+      } else {
+        res.status(400);
+        throw new Error('Error registering new user');
       }
-    } catch (err) {}
+    } catch (err) {
+      res.status(400);
+      throw new Error('Error registering new user');
+    }
+  }
+);
+
+// login user
+export const loginUser: RequestHandler = asyncHandler(
+  async (req, res, next) => {
+    try {
+      // destructure from req.body
+      const { email, password } = req.body;
+
+      // check for user
+      const user = await User.findOne({ email });
+
+      // if user found and pw matches
+      if (user && bcrypt.compare(password, user.password)) {
+        res.status(200).json({
+          _id: user._id,
+          userName: user.userName,
+          name: user.name,
+          email: user.email,
+          token: createToken(user._id),
+        });
+      } else {
+        // unauthorized
+        res.status(401);
+        throw new Error('Invalid Credentials');
+      }
+    } catch (err) {
+      res.status(401);
+      throw new Error('Invalid Credentials');
+    }
   }
 );
