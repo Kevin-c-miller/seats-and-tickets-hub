@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import * as dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db';
+import user from './routes/userRoutes';
 
 const PORT = process.env.PORT || 5000;
 dotenv.config();
@@ -18,7 +19,7 @@ app.use(bodyParser.json()).use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // routes
-// app.use('/api/users', userRoutes)
+app.use('/api/users', user);
 // app.use('/api/events', eventRoutes)
 
 app.listen(PORT, () => {

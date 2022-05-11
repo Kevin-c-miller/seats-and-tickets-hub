@@ -5,6 +5,7 @@ const authController_1 = require("../controllers/auth/authController");
 const router = (0, express_1.Router)();
 // register user
 router
-    .post('/', authController_1.signUpUser)
+    .post('/register', authController_1.signUpUser)
     // login user
     .post('/login', authController_1.loginUser);
+exports.default = router;

@@ -81,6 +81,7 @@ export const signUpUser: RequestHandler = asyncHandler(
         res.json({
           message: `Hi ${newUser.userName}! Welcome to my User API`,
           user: newUser._id,
+          token: token,
         });
         //   save new user to db
         await newUser.save();

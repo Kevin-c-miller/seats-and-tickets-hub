@@ -31,6 +31,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const dotenv = __importStar(require("dotenv"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const db_1 = __importDefault(require("./config/db"));
+const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const PORT = process.env.PORT || 5000;
 dotenv.config();
 // connect to db
@@ -41,7 +42,7 @@ app.use(express_1.default.json());
 app.use(body_parser_1.default.json()).use(body_parser_1.default.urlencoded({ extended: false }));
 app.use((0, cookie_parser_1.default)());
 // routes
-// app.use('/api/users', userRoutes)
+app.use('/api/users', userRoutes_1.default);
 // app.use('/api/events', eventRoutes)
 app.listen(PORT, () => {
     console.log(`Server listening on PORT ${PORT}.`);
