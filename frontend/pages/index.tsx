@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css';
 import requests from '../services/requests';
 import { useEffect } from 'react';
 import { Events } from '../types';
+import AllEvents from '../components/AllEvents';
 
 interface Props {
   getAllEvents: Events[];
@@ -12,13 +13,6 @@ interface Props {
 
 const Home = ({ getAllEvents }: Props) => {
   useEffect(() => {
-    //   const getEvents = async () => {
-    //     const result = await fetch(
-    //       `https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=5BfVibA1SBpOzk7ubCpmS0vvSeMP5Vf9`
-    //     ).then((res) => res.json());
-    //     console.log(result._embedded.events);
-    //   };
-    //   getEvents();
     console.log(getAllEvents);
   }, []);
 
@@ -32,7 +26,7 @@ const Home = ({ getAllEvents }: Props) => {
 
       <main>
         {/* <Search /> */}
-        {/* <Events /> */}
+        <AllEvents title="Upcoming Events" events={getAllEvents} />
       </main>
 
       {/* <Footer /> */}
