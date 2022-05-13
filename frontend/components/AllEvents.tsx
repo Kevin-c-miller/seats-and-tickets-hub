@@ -1,5 +1,7 @@
 import React from 'react';
+import EventDetails from '../pages/EventDetails';
 import { Events } from '../types';
+import Link from 'next/link';
 
 interface Props {
   title: string;
@@ -9,7 +11,7 @@ interface Props {
 const AllEvents = ({ title, events }: Props) => {
   // TODO: render local events (if any, if not, just show generic events for US)
 
-  // convert time miliary time to standard time
+  // convert miliary time to standard time
   const timeConversion = (militaryTime: string) => {
     const [hours, minutes, seconds] = militaryTime.split(':');
     return `${+hours > 12 ? +hours - 12 : hours}:${minutes}${
@@ -22,14 +24,14 @@ const AllEvents = ({ title, events }: Props) => {
       <h1>{title}</h1>
 
       {events.map((event) => (
-        <div key={event?.id}>
-          <h3>{event?.name}</h3>
-          <h5>{event?.dates?.start?.localDate}</h5>
-          <h5>{timeConversion(event?.dates?.start?.localTime)}</h5>
-
-          {/* TODO: link to own page with more event details */}
-          {/*  <EventDetails event={event} />  */}
-        </div>
+        <Link href="/EventDetails" key={event?.id}>
+          <div>
+            <h3>{event?.name}</h3>
+            <h5>{event?.dates?.start?.localDate}</h5>
+            <h5>{timeConversion(event?.dates?.start?.localTime)}</h5>
+            <EventDetails event={event} />
+          </div>
+        </Link>
       ))}
     </div>
   );
