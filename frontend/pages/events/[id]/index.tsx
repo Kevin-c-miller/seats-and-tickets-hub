@@ -1,7 +1,5 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import { Events } from '../../../types';
 
 const url = 'https://app.ticketmaster.com/discovery/v2/';
@@ -27,19 +25,7 @@ const event = ({ event }: Props) => {
   );
 };
 
-// can use this way but it is slower than using statics paths and props together
-// export const getServerSideProps = async (context: any) => {
-//   const res = await fetch(
-//     `${url}events/${context.params.id}.json?apikey=${process.env.NEXT_PUBLIC_API_KEY}`
-//   );
-
-//   const event = await res.json();
-//   return {
-//     props: {
-//       event,
-//     },
-//   };
-// };
+// static paths and props
 
 export const getStaticPaths = async () => {
   const res = await fetch(
@@ -62,7 +48,6 @@ export const getStaticProps = async (context: any) => {
     `${url}events/${context.params.id}.json?apikey=${process.env.NEXT_PUBLIC_API_KEY}`
   );
   const event = await res.json();
-  console.log(event);
 
   return {
     props: { event },
