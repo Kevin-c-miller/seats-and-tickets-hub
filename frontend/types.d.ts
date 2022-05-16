@@ -2,6 +2,14 @@ export interface Events {
   name: string;
   id: string;
   url: string;
+  priceRanges: [
+    {
+      currency: string;
+      max: number;
+      min: number;
+      type: string;
+    }
+  ];
   dates: {
     start: {
       localDate: string;
