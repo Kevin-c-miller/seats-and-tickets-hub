@@ -1,6 +1,7 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Events } from '../../types';
+import { Events } from '../../../types';
 
 export const getStaticPaths = async () => {
   const url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${process.env.NEXT_PUBLIC_API_KEY}`;
@@ -11,8 +12,6 @@ export const getStaticPaths = async () => {
   const paths = data.map((event: Events) => ({
     params: { id: event?.id.toString() },
   }));
-
-  // console.log(paths);
 
   return {
     paths,
@@ -38,26 +37,16 @@ interface Props {
   event: Events[];
 }
 
-const EventDetails = ({ event }: Props) => {
-  // useEffect(() => {
-  //   const getEvent = async () => {
-  //     const url = `https://app.ticketmaster.com/discovery/v2/events/Z7r9jZ1AdFYZz.json?apikey=${process.env.NEXT_PUBLIC_API_KEY}`;
-
-  //     const res = await fetch(url).then((res) => res.json());
-  //     const data = res._embedded.events;
-  //     console.log(res);
-  //   };
-  //   getEvent();
-  // }, []);
+const event = ({ event }: Props) => {
+  const router = useRouter();
+  // grabbing id from router
+  const { id } = router.query;
 
   console.log(event);
   return (
     <div>
-      <Head>
-        {/* <title>{`${event?.name} Details` || 'Event Details'} </title> */}
-      </Head>
+      <Head>Event Details</Head>
 
-      {/* <div>{props ? <h3>{props?.}</h3> : <h3>Event Details</h3>}</div> */}
       <div>
         <h3>Details</h3>
       </div>
@@ -65,4 +54,15 @@ const EventDetails = ({ event }: Props) => {
   );
 };
 
-export default EventDetails;
+export default event;
+
+// useEffect(() => {
+//   const getEvent = async () => {
+//     const url = `https://app.ticketmaster.com/discovery/v2/events/Z7r9jZ1AdFYZz.json?apikey=${process.env.NEXT_PUBLIC_API_KEY}`;
+
+//     const res = await fetch(url).then((res) => res.json());
+//     const data = res._embedded.events;
+//     console.log(res);
+//   };
+//   getEvent();
+// }, []);

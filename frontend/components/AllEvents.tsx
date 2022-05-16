@@ -1,7 +1,6 @@
 import React from 'react';
 import EventDetail from '../components/EventDetail';
 import { Events } from '../types';
-import Link from 'next/link';
 
 interface Props {
   title: string;
@@ -16,9 +15,7 @@ const AllEvents = ({ title, events }: Props) => {
       <h1>{title}</h1>
 
       {events.map((event) => (
-        <Link href={`/events/${event?.id}`} key={event?.id}>
-          <EventDetail event={event} />
-        </Link>
+        <EventDetail event={event} />
       ))}
     </div>
   );

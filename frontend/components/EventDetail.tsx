@@ -1,4 +1,4 @@
-import React from 'react';
+import Link from 'next/link';
 import { Events } from '../types';
 
 interface Props {
@@ -14,26 +14,29 @@ const EventDetail = ({ event }: Props) => {
     } ${+hours >= 12 ? 'PM' : 'AM'}`;
   };
   return (
-    <div
-      style={{
-        width: '20%',
-        height: '200px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        border: '1px solid #000',
-        borderRadius: '10px',
-        margin: '20px',
-        padding: '10px',
-        cursor: 'pointer',
-      }}
-    >
-      <h4>{event?.name}</h4>
+    <Link href="/events/[id]" as={`events/${event?.id}`}>
+      <div
+        key={event?.id}
+        style={{
+          width: '20%',
+          height: '200px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          border: '1px solid #000',
+          borderRadius: '10px',
+          margin: '20px',
+          padding: '10px',
+          cursor: 'pointer',
+        }}
+      >
+        <h4>{event?.name}</h4>
 
-      <h5>{event?.dates?.start?.localDate}</h5>
-      <h5>{timeConversion(event?.dates?.start?.localTime)}</h5>
-    </div>
+        <h5>{event?.dates?.start?.localDate}</h5>
+        <h5>{timeConversion(event?.dates?.start?.localTime)}</h5>
+      </div>
+    </Link>
   );
 };
 
