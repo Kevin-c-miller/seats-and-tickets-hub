@@ -13,10 +13,11 @@ const EventDetail = ({ event }: Props) => {
       seconds ? `:${seconds}` : ''
     } ${+hours >= 12 ? 'PM' : 'AM'}`;
   };
+
+  console.log(event);
   return (
     <Link href="/events/[id]" as={`events/${event?.id}`}>
       <div
-        key={event?.id}
         style={{
           width: '20%',
           height: '200px',

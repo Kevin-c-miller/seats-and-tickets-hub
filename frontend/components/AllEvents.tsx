@@ -15,7 +15,7 @@ const AllEvents = ({ title, events }: Props) => {
       <h1>{title}</h1>
 
       {events.map((event) => (
-        <EventDetail event={event} />
+        <EventDetail event={event} key={event?.id} />
       ))}
     </div>
   );

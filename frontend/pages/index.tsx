@@ -13,7 +13,7 @@ interface Props {
 
 const Home = ({ getAllEvents }: Props) => {
   useEffect(() => {
-    // console.log(getAllEvents);
+    console.log(getAllEvents);
   }, []);
 
   return (

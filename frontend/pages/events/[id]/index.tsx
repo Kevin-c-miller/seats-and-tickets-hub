@@ -1,17 +1,55 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Events } from '../../../types';
 
+const url = 'https://app.ticketmaster.com/discovery/v2/';
+
+interface Props {
+  event: Events;
+}
+
+const event = ({ event }: Props) => {
+  console.log(event);
+
+  return (
+    <div>
+      <Head>Event Details</Head>
+
+      <div>
+        <h3>Details</h3>
+        <h4>Event Name: {event.name}</h4>
+      </div>
+
+      <Link href="/">Go Back</Link>
+    </div>
+  );
+};
+
+// can use this way but it is slower than using statics paths and props together
+// export const getServerSideProps = async (context: any) => {
+//   const res = await fetch(
+//     `${url}events/${context.params.id}.json?apikey=${process.env.NEXT_PUBLIC_API_KEY}`
+//   );
+
+//   const event = await res.json();
+//   return {
+//     props: {
+//       event,
+//     },
+//   };
+// };
+
 export const getStaticPaths = async () => {
-  const url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${process.env.NEXT_PUBLIC_API_KEY}`;
+  const res = await fetch(
+    `${url}events.json?countryCode=US&apikey=${process.env.NEXT_PUBLIC_API_KEY}`
+  );
+  const data = await res.json();
+  const events = data._embedded.events;
 
-  const res = await fetch(url).then((res) => res.json());
-  const data = res._embedded.events;
-
-  const paths = data.map((event: Events) => ({
-    params: { id: event?.id.toString() },
-  }));
+  const ids = events.map((event: any) => event.id);
+  const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
 
   return {
     paths,
@@ -20,49 +58,15 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context: any) => {
-  const id = context.params.id;
-  console.log(id);
   const res = await fetch(
-    `https://app.ticketmaster.com/discovery/v2/events/${id}.json?apikey=${process.env.NEXT_PUBLIC_API_KEY}`
-  ).then((res) => res.json());
-
-  // console.log(res);
+    `${url}events/${context.params.id}.json?apikey=${process.env.NEXT_PUBLIC_API_KEY}`
+  );
+  const event = await res.json();
+  console.log(event);
 
   return {
-    props: { event: res },
+    props: { event },
   };
 };
 
-interface Props {
-  event: Events[];
-}
-
-const event = ({ event }: Props) => {
-  const router = useRouter();
-  // grabbing id from router
-  const { id } = router.query;
-
-  console.log(event);
-  return (
-    <div>
-      <Head>Event Details</Head>
-
-      <div>
-        <h3>Details</h3>
-      </div>
-    </div>
-  );
-};
-
 export default event;
-
-// useEffect(() => {
-//   const getEvent = async () => {
-//     const url = `https://app.ticketmaster.com/discovery/v2/events/Z7r9jZ1AdFYZz.json?apikey=${process.env.NEXT_PUBLIC_API_KEY}`;
-
-//     const res = await fetch(url).then((res) => res.json());
-//     const data = res._embedded.events;
-//     console.log(res);
-//   };
-//   getEvent();
-// }, []);
