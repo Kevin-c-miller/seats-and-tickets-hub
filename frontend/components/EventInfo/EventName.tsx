@@ -7,8 +7,8 @@ interface Props {
 
 const EventName = ({ event }: Props) => {
   return (
-    <div className="eventName">
-      <h3>
+    <div className="text-center m-8">
+      <h3 className="text-3xl hover:text-[#5751fc] hover:underline">
         <a href={event?.url} target="_blank" rel="noopener noreferrer">
           {event?.name}
         </a>

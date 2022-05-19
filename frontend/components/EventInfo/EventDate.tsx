@@ -8,7 +8,7 @@ interface Props {
 
 const EventDate = ({ event }: Props) => {
   return (
-    <div className="eventDate">
+    <div className="text-center mb-4">
       <ul>
         <li>
           <strong>Date: </strong> {event?.dates?.start?.localDate}
@@ -18,9 +18,9 @@ const EventDate = ({ event }: Props) => {
           {timeConversion(event?.dates?.start?.localTime)}
         </li>
         {event?.pleaseNote && (
-          <ul>
-            <li>{event?.pleaseNote}</li>
-          </ul>
+          <div className="mt-6 px-8">
+            <p className=" text-sm">{event?.pleaseNote}</p>
+          </div>
         )}
       </ul>
     </div>

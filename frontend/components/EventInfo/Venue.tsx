@@ -7,8 +7,8 @@ interface Props {
 
 const Venue = ({ event }: Props) => {
   return (
-    <div className="venueInfo">
-      <h4>{event?._embedded?.venues[0]?.name}</h4>
+    <div className="flex flex-col justify-center items-center">
+      <h4 className="text-2xl">{event?._embedded?.venues[0]?.name}</h4>
       <h5>
         {event?._embedded?.venues[0]?.address?.line1},{' '}
         {event?._embedded?.venues[0]?.city?.name},{' '}
@@ -17,14 +17,21 @@ const Venue = ({ event }: Props) => {
         {event?._embedded?.venues[0]?.country?.name}
       </h5>
       {event?._embedded?.venues[0]?.images ? (
-        <div className="venueImage">
+        <div className="m-4 px-4">
           <img
             src={event?._embedded?.venues[0].images[0]?.url}
             alt={event?._embedded.venues[0]?.name}
+            className="rounded-[20px]"
           />
         </div>
       ) : (
-        <img src={event?.images[0]?.url} alt={event?.name} />
+        <div className="m-4 px-4">
+          <img
+            src={event?.images[0]?.url}
+            alt={event?.name}
+            className="rounded-[20px]"
+          />
+        </div>
       )}
     </div>
   );

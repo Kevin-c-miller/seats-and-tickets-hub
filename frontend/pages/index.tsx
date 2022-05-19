@@ -24,7 +24,7 @@ const Home = ({ getAllEvents }: Props) => {
 
       {/* <Navbar /> */}
 
-      <main>
+      <main className="flex flex-col items-start justify-center">
         {/* <Search /> */}
         <AllEvents title="Upcoming Events" events={getAllEvents} />
       </main>

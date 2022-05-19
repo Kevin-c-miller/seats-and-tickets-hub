@@ -13,12 +13,18 @@ const event = ({ event }: Props) => {
   console.log(event);
 
   return (
-    <div>
-      <Head>Event Details</Head>
+    <div className="flex flex-col justify-center items-center">
+      <Head>
+        <title>{event?.name} Details</title>
+      </Head>
 
       <EventInformation event={event} />
 
-      <Link href="/">Go Back</Link>
+      <Link href="/">
+        <button className="w-[75px] rounded-[10px] mb-14 py-[10px] bg-[#65ccff] hover:opacity-75">
+          Go Back
+        </button>
+      </Link>
     </div>
   );
 };

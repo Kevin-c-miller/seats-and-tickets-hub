@@ -11,14 +11,17 @@ const AllEvents = ({ title, events }: Props) => {
   // TODO: render local events (if any, if not, just show generic events for US)
 
   return (
-    <div>
-      {/* TODO: build rows for each type of event section // change to a flex row */}
-      <h1>{title}</h1>
+    <>
+      <h1 className="text-center text-2xl font-bold mx-12 my-4">{title}</h1>
 
-      {events.map((event) => (
-        <EventDetail event={event} key={event?.id} />
-      ))}
-    </div>
+      <div className="flex items-center justify-center overflow-x-scroll mx-4 px-4">
+        {/* TODO: build rows for each type of event section // change to a flex row */}
+
+        {events.map((event) => (
+          <EventDetail event={event} key={event?.id} />
+        ))}
+      </div>
+    </>
   );
 };
 

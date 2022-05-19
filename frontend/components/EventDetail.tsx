@@ -9,25 +9,16 @@ interface Props {
 const EventDetail = ({ event }: Props) => {
   return (
     <Link href="/events/[id]" as={`events/${event?.id}`}>
-      <div
-        style={{
-          width: '20%',
-          height: '200px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          border: '1px solid #000',
-          borderRadius: '10px',
-          margin: '20px',
-          padding: '10px',
-          cursor: 'pointer',
-        }}
-      >
-        <h4>{event?.name}</h4>
-
-        <h5>{event?.dates?.start?.localDate}</h5>
-        <h5>{timeConversion(event?.dates?.start?.localTime)}</h5>
+      <div className="flex flex-col items-start justify-center w-[250px] h-[250px] border-2 border-black rounded-xl m-4 p-3 cursor-pointer ">
+        <div className="p-2 h-[50%] w-[100%]">
+          <h4 className="text-base text-center font-bold">{event?.name}</h4>
+        </div>
+        <div className="flex flex-col items-center justify-start p-4 h-[50%] w-[100%]">
+          <h5 className="font-medium m-2">{event?.dates?.start?.localDate}</h5>
+          <h5 className="font-medium">
+            {timeConversion(event?.dates?.start?.localTime)}
+          </h5>
+        </div>
       </div>
     </Link>
   );
