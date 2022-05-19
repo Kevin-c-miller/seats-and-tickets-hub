@@ -7,11 +7,14 @@ interface Props {
 
 const TicketLimitInfo = ({ event }: Props) => {
   return (
-    <div className="ticketLimitInfo">
+    <div className="flex items-center justify-end m-4 p-2 max-w-lg">
       <h6>
-        {event?.ticketLimit?.info}
+        <span className="text-sm italic">***{event?.ticketLimit?.info}</span>
         <br />
-        {event?._embedded?.venues[0]?.boxOfficeInfo.acceptedPaymentDetail}
+        <span className="text-sm">
+          <strong> Accepted Payments:</strong>{' '}
+          {event?._embedded?.venues[0]?.boxOfficeInfo.acceptedPaymentDetail}
+        </span>
       </h6>
     </div>
   );
