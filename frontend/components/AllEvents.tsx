@@ -12,6 +12,7 @@ const AllEvents = ({ title, events }: Props) => {
 
   return (
     <div>
+      {/* TODO: build rows for each type of event section // change to a flex row */}
       <h1>{title}</h1>
 
       {events.map((event) => (

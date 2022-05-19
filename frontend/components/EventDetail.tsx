@@ -14,7 +14,6 @@ const EventDetail = ({ event }: Props) => {
     } ${+hours >= 12 ? 'PM' : 'AM'}`;
   };
 
-  console.log(event);
   return (
     <Link href="/events/[id]" as={`events/${event?.id}`}>
       <div
