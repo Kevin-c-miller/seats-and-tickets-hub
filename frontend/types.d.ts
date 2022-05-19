@@ -2,6 +2,11 @@ export interface Events {
   name: string;
   id: string;
   url: string;
+  info: string;
+  pleaseNote: string;
+  ticketLimit: {
+    info: string;
+  };
   priceRanges: [
     {
       currency: string;
@@ -23,9 +28,16 @@ export interface Events {
     venues: [
       {
         name: string;
+        postalCode: string;
         address: {
           line1: string;
         };
+        boxOfficeInfo: {
+          acceptedPaymentDetail: string;
+          openHoursDetail: string;
+          phoneNumberDetail: string;
+        };
+        parkingDetail: string;
         city: {
           name: string;
         };
@@ -35,6 +47,10 @@ export interface Events {
         };
         country: {
           name: string;
+        };
+        generalInfo: {
+          childRule: string;
+          generalRule: string;
         };
         images: [
           {

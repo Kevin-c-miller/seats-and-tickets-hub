@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import EventInformation from '../../../components/EventInformation';
 import { Events } from '../../../types';
 
 const url = 'https://app.ticketmaster.com/discovery/v2/';
@@ -15,18 +16,14 @@ const event = ({ event }: Props) => {
     <div>
       <Head>Event Details</Head>
 
-      <div>
-        <h3>Details</h3>
-        <h4>Event Name: {event.name}</h4>
-      </div>
+      <EventInformation event={event} />
 
       <Link href="/">Go Back</Link>
     </div>
   );
 };
 
-// static paths and props
-
+// static paths
 export const getStaticPaths = async () => {
   const res = await fetch(
     `${url}events.json?countryCode=US&apikey=${process.env.NEXT_PUBLIC_API_KEY}`
@@ -43,6 +40,7 @@ export const getStaticPaths = async () => {
   };
 };
 
+// static props
 export const getStaticProps = async (context: any) => {
   const res = await fetch(
     `${url}events/${context.params.id}.json?apikey=${process.env.NEXT_PUBLIC_API_KEY}`
