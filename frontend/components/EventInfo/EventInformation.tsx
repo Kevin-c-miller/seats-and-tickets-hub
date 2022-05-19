@@ -17,16 +17,18 @@ const EventInformation = ({ event }: Props) => {
       <div className="eventDateAndTickets">
         <EventDate event={event} />
         <br />
-        <div className="ticketInfo">
-          <TicketInfo event={event} />
-
-          <TicketLimitInfo event={event} />
-        </div>
+        {event?.priceRanges && (
+          <div className="ticketInfo">
+            <TicketInfo event={event} />
+            <TicketLimitInfo event={event} />
+          </div>
+        )}
       </div>
 
       <Venue event={event} />
-
-      <BoxOfficeInfo event={event} />
+      {event?._embedded?.venues[0]?.boxOfficeInfo && (
+        <BoxOfficeInfo event={event} />
+      )}
     </div>
   );
 };

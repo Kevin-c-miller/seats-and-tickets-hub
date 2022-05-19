@@ -11,7 +11,6 @@ const TicketLimitInfo = ({ event }: Props) => {
       <h6>
         {event?.ticketLimit?.info}
         <br />
-
         {event?._embedded?.venues[0]?.boxOfficeInfo.acceptedPaymentDetail}
       </h6>
     </div>

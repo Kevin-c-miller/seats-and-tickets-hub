@@ -1,21 +1,14 @@
 import React from 'react';
 import { Events } from '../../types';
+import { timeConversion } from '../../utilities/timeConversion';
 
 interface Props {
   event: Events;
 }
 
 const EventDate = ({ event }: Props) => {
-  // convert miliary time to standard time
-  const timeConversion = (militaryTime: string) => {
-    const [hours, minutes, seconds] = militaryTime.split(':');
-    return `${+hours > 12 ? +hours - 12 : hours}:${minutes}${
-      seconds ? `:${seconds}` : ''
-    } ${+hours >= 12 ? 'PM' : 'AM'}`;
-  };
-
   return (
-    <div>
+    <div className="eventDate">
       <ul>
         <li>
           <strong>Date: </strong> {event?.dates?.start?.localDate}
@@ -24,9 +17,11 @@ const EventDate = ({ event }: Props) => {
           <strong>Time: </strong>{' '}
           {timeConversion(event?.dates?.start?.localTime)}
         </li>
-        <ul>
-          <li>{event?.pleaseNote}</li>
-        </ul>
+        {event?.pleaseNote && (
+          <ul>
+            <li>{event?.pleaseNote}</li>
+          </ul>
+        )}
       </ul>
     </div>
   );

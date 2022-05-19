@@ -16,13 +16,16 @@ const Venue = ({ event }: Props) => {
         {event?._embedded?.venues[0]?.postalCode},{' '}
         {event?._embedded?.venues[0]?.country?.name}
       </h5>
-
-      <div className="venueImage">
-        <img
-          src={event?._embedded?.venues[0].images[0]?.url}
-          alt={event?._embedded.venues[0]?.name}
-        />
-      </div>
+      {event?._embedded?.venues[0]?.images ? (
+        <div className="venueImage">
+          <img
+            src={event?._embedded?.venues[0].images[0]?.url}
+            alt={event?._embedded.venues[0]?.name}
+          />
+        </div>
+      ) : (
+        <img src={event?.images[0]?.url} alt={event?.name} />
+      )}
     </div>
   );
 };
