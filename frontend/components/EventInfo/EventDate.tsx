@@ -8,7 +8,7 @@ interface Props {
 
 const EventDate = ({ event }: Props) => {
   return (
-    <div className="eventDate">
+    <div className="text-center mb-4">
       <ul>
         <li>
           <strong>Date: </strong> {event?.dates?.start?.localDate}

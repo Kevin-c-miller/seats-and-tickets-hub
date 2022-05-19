@@ -12,7 +12,7 @@ interface Props {
 
 const EventInformation = ({ event }: Props) => {
   return (
-    <div className="eventDetails">
+    <div className="flex flex-col min-h-screen">
       <EventName event={event} />
       <div className="eventDateAndTickets">
         <EventDate event={event} />
