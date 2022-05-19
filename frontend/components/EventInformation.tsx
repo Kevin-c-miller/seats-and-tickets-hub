@@ -21,38 +21,49 @@ const EventInformation = ({ event }: Props) => {
           {event?.name}
         </a>
       </h3>
-      <ul>
-        <li>
-          <strong>Date: </strong> {event?.dates?.start?.localDate}
-        </li>
-        <li>
-          <strong>Time: </strong>{' '}
-          {timeConversion(event?.dates?.start?.localTime)}
-        </li>
-        <br />
-        <div className="ticketInfo">
+      <div className="eventDateAndTickets">
+        <ul>
           <li>
-            <strong>Ticket Information: </strong>
-            <ul>
-              <li>
-                <strong>Ticket Type:</strong> {event?.priceRanges[0]?.type}
-              </li>
-              <li>
-                <strong>Currency: </strong> {event?.priceRanges[0]?.currency}
-              </li>
-              <li>
-                <strong>Min Price: </strong> ${event?.priceRanges[0]?.min}
-              </li>
-              <li>
-                <strong>Max Price: </strong> ${event?.priceRanges[0]?.max}
-              </li>
-            </ul>
+            <strong>Date: </strong> {event?.dates?.start?.localDate}
           </li>
-          <div className="ticketLimitInfo">
-            <h6>{event?.ticketLimit?.info}</h6>
+          <li>
+            <strong>Time: </strong>{' '}
+            {timeConversion(event?.dates?.start?.localTime)}
+          </li>
+          <ul>
+            <li>{event?.pleaseNote}</li>
+          </ul>
+          <br />
+          <div className="ticketInfo">
+            <li>
+              <strong>Ticket Information: </strong>
+              <ul>
+                <li>
+                  <strong>Ticket Type:</strong> {event?.priceRanges[0]?.type}
+                </li>
+                <li>
+                  <strong>Currency: </strong> {event?.priceRanges[0]?.currency}
+                </li>
+                <li>
+                  <strong>Min Price: </strong> ${event?.priceRanges[0]?.min}
+                </li>
+                <li>
+                  <strong>Max Price: </strong> ${event?.priceRanges[0]?.max}
+                </li>
+              </ul>
+            </li>
+            <div className="ticketLimitInfo">
+              <h6>{event?.ticketLimit?.info}</h6>
+              <p>
+                {
+                  event?._embedded?.venues[0]?.boxOfficeInfo
+                    .acceptedPaymentDetail
+                }
+              </p>
+            </div>
           </div>
-        </div>
-      </ul>
+        </ul>
+      </div>
 
       <div className="venueInfo">
         <h4>{event?._embedded?.venues[0]?.name}</h4>
@@ -70,6 +81,10 @@ const EventInformation = ({ event }: Props) => {
           src={event?._embedded?.venues[0].images[0]?.url}
           alt={event?._embedded.venues[0]?.name}
         />
+      </div>
+
+      <div className="boxOfficeInfo">
+        <p>{event?._embedded?.venues[0]?.boxOfficeInfo.openHoursDetail}</p>
       </div>
     </div>
   );
