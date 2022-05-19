@@ -1,19 +1,12 @@
 import Link from 'next/link';
 import { Events } from '../types';
+import { timeConversion } from '../utilities/timeConversion';
 
 interface Props {
   event: Events;
 }
 
 const EventDetail = ({ event }: Props) => {
-  // convert miliary time to standard time
-  const timeConversion = (militaryTime: string) => {
-    const [hours, minutes, seconds] = militaryTime.split(':');
-    return `${+hours > 12 ? +hours - 12 : hours}:${minutes}${
-      seconds ? `:${seconds}` : ''
-    } ${+hours >= 12 ? 'PM' : 'AM'}`;
-  };
-
   return (
     <Link href="/events/[id]" as={`events/${event?.id}`}>
       <div

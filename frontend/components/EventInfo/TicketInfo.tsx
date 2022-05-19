@@ -6,7 +6,7 @@ interface Props {
 
 const TicketInfo = ({ event }: Props) => {
   return (
-    <>
+    <div className="tickets">
       <ul>
         <li>
           <strong>Ticket Information: </strong>
@@ -26,7 +26,7 @@ const TicketInfo = ({ event }: Props) => {
           </ul>
         </li>
       </ul>
-    </>
+    </div>
   );
 };
 
