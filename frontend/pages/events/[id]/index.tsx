@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import EventInformation from '../../../components/EventInformation';
+import EventInformation from '../../../components/EventInfo/EventInformation';
 import { Events } from '../../../types';
 
 const url = 'https://app.ticketmaster.com/discovery/v2/';
