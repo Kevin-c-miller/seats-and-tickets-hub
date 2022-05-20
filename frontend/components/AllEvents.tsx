@@ -7,9 +7,7 @@ interface Props {
   events: Events[];
 }
 
-const AllEvents = ({ title, events }: Props) => {
-  // TODO: render local events (if any, if not, just show generic events for US)
-
+const AllEvents = ({ title, events, location }: Props) => {
   return (
     <>
       <h1 className="text-center text-2xl font-bold mx-12 my-4">{title}</h1>
