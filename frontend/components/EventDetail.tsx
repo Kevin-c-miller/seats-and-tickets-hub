@@ -16,7 +16,7 @@ const EventDetail = ({ event }: Props) => {
         <div className="flex flex-col items-center justify-start p-4 h-[50%] w-[100%]">
           <h5 className="font-medium m-2">{event?.dates?.start?.localDate}</h5>
           <h5 className="font-medium">
-            {timeConversion(event?.dates?.start?.localTime)}
+            {/* {timeConversion(event?.dates?.start?.localTime)} */}
           </h5>
         </div>
       </div>

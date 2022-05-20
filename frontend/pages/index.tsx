@@ -9,7 +9,7 @@ import {
   getSearchedEvents,
   getLocalEvents,
 } from '../utilities/services/requests';
-import SearchedEvents from '../components/SearchedEvents';
+import LocalEvents from '../components/LocalEvents';
 
 interface Props {
   getAllEvents: Events[];
@@ -17,20 +17,23 @@ interface Props {
 
 const Home = ({ getAllEvents }: Props) => {
   const [location, setLocation] = useState('');
-  const [localEvents, setLocalEvents] = useState([]);
+  const [localEvents, setLocalEvents] = useState<Events[]>([]);
 
   // get user location
   const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const location = `${position.coords.latitude},${position.coords.longitude}`;
-        setLocation(location.toString());
-      });
-    } else {
-      console.log('location not found');
+    try {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const userLocation = `${position.coords.latitude.toString()},${position.coords.longitude.toString()}`;
+          setLocation(userLocation);
+        });
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
+  // get local events
   const fetchLocalEvents = async () => {
     try {
       const local = await getLocalEvents(location);
@@ -41,8 +44,8 @@ const Home = ({ getAllEvents }: Props) => {
   };
 
   useEffect(() => {
-    console.log(getAllEvents);
     getLocation();
+    console.log(getAllEvents);
     fetchLocalEvents();
   }, []);
 
@@ -57,7 +60,7 @@ const Home = ({ getAllEvents }: Props) => {
       <main className="flex flex-col items-start justify-center">
         {/* <Search /> */}
         <AllEvents title="Upcoming Events" events={getAllEvents} />
-        <SearchedEvents title="Events Near Me" localEvents={localEvents} />
+        <LocalEvents title="Events Near Me" localEvents={localEvents} />
       </main>
 
       {/* <Footer /> */}
