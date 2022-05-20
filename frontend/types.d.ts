@@ -4,6 +4,9 @@ export interface Events {
   url: string;
   info: string;
   pleaseNote: string;
+  images: [{
+    url: string
+  }]
   ticketLimit: {
     info: string;
   };
