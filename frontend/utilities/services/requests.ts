@@ -26,19 +26,6 @@ export const getLocalEvents = async (location: string) => {
   }
 };
 
-// get user location
-export const getLocation = () => {
-  try {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const location = `${position.coords.latitude.toString()},${position.coords.longitude.toString()}`;
-        return location;
-      });
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 // structure requests with no arguments as an object and export just the one object
 const requests = {
