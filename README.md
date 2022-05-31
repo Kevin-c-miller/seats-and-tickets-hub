@@ -1,6 +1,7 @@
 # seats-and-tickets-hub
 
-## Lookup tickets to events locally as well as nationally.
+## Description
+- Lookup tickets to events locally as well as nationally.
 
 ## Technologies
 - Express
